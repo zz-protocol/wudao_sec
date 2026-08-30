@@ -3,14 +3,24 @@
 Data plane prefers REST. Browsers are only for forms with no API.
 
 ```
-1 hunt → 2 triage → 3 Q2 live repro → 4 gate-submit → 5 human submit → 6 track
+0 scout → gate-target → 1 hunt → 2 triage → 3 Q2 live repro → 4 gate-submit → 5 human submit → 6 track
 ```
+
+## Stage 0 — Scout (different agent)
+
+Load `SCOUT.md`. Output **only** `queue/proposed.json` (≤5 repos). No source audit.
+
+```bash
+node tools/gate-target.mjs --in queue/proposed.json --out queue/admitted.json
+```
+
+Rejected rows stay out. Hunter may not run until `admitted` is non-empty.
 
 ## Stage 1 — Hunt
 
-Hunter reads `AGENTS.md` + `TARGET-POLICY.md`.  
+Hunter reads `AGENTS.md` + `queue/admitted.json` + `TARGET-POLICY.md`.  
 Output: `findings/<id>.json` with status `unverified` | `blocked` | `candidate`.  
-No submission markdown.
+No submission markdown. One admitted repo at a time.
 
 ## Stage 2 — Triage
 

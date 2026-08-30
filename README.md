@@ -20,9 +20,16 @@ Two rules were fighting each other: the hunter was told **never execute**, the s
 ## Architecture
 
 ```
-human picks target (whitelist)
-        │
-        ▼
+┌───────────────────┐
+│  Scout agent      │  queue/proposed.json only
+│  (SCOUT.md)       │  no source audit
+└─────────┬─────────┘
+          ▼
+┌───────────────────┐
+│  gate-target.mjs  │  OSV + sibling + deny list
+└─────────┬─────────┘
+          │ queue/admitted.json
+          ▼
 ┌───────────────────┐
 │  Hunter agent     │  findings/*.json only
 │  (researcher)     │  no PVR / no email / no forms
@@ -39,7 +46,7 @@ human picks target (whitelist)
 └───────────────────┘
 ```
 
-**Hunter is not the submitter.** One claim at a time.
+**Scout is not the hunter. Hunter is not the submitter.** One admitted repo, one claim.
 
 ## Copy this in 10 minutes
 
@@ -59,7 +66,9 @@ node tools/gh-submit.mjs pvr owner/repo --summary "..." --body-file report.md --
 
 | Path | Role |
 |---|---|
-| `AGENTS.md` | Injected into every hunter session |
+| `SCOUT.md` | Target-picker agent (writes proposed.json only) |
+| `tools/gate-target.mjs` | Admits scout rows after OSV/sibling/deny |
+| `AGENTS.md` | Injected into every **hunter** session |
 | `RULE.md` | Seven red lines |
 | `TARGET-POLICY.md` | Allow / deny before the first grep |
 | `SUBMISSION-STANDARDS.md` | Q1–Q4 + report hygiene |

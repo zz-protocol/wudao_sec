@@ -1,0 +1,15 @@
+[
+  {
+    "repo": "keras-team/tf-keras",
+    "channel": "github-pvr",
+    "allow_class": 3,
+    "why": "OSV empty on tf-keras so this must be a new tar extract vuln",
+    "package": { "ecosystem": "PyPI", "name": "tf-keras" },
+    "siblings": ["keras"],
+    "osv_ids": [],
+    "default_bind": "n/a library",
+    "security_md": "none",
+    "pvr": true,
+    "new_vector": "same hardlink gadget as keras"
+  }
+]

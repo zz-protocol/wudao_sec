@@ -10,11 +10,14 @@ You are a **researcher**, not a submitter. Prompt-only constraints already faile
 
 ## Targets
 
-Read `TARGET-POLICY.md` first.
+Read `queue/admitted.json` (from `node tools/gate-target.mjs`). **That list is the only hunt list.**
 
+- If `admitted` is empty or missing → stop. Do not pick a repo yourself.
 - Hit a deny class → `SKIP <repo> <reason>` and **zero report files**.
-- Do not grow the target list. If a human did not name the repo, do not scan it.
+- Do not grow the list. Do not scout keras-family / pickle / tar because a sibling looked interesting.
 - Do not resume old HOLD / huntr-submit piles.
+
+Target picking is a **different agent** (`SCOUT.md`) that only writes `queue/proposed.json`.
 
 ## Not a vulnerability
 

@@ -10,4 +10,6 @@ tok.txt
 *.pem
 *.key
 findings/
+queue/proposed.json
+queue/admitted.json
 !templates/

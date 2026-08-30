@@ -1,0 +1,15 @@
+[
+  {
+    "repo": "cdapio/cdap",
+    "channel": "google-oss-vrp",
+    "allow_class": 1,
+    "why": "On Google OSS VRP list this week; HTTP management plane in default distro",
+    "package": { "ecosystem": "Maven", "name": "io.cdap.cdap:cdap-app-fabric" },
+    "siblings": ["io.cdap.cdap:cdap-gateway"],
+    "osv_ids": [],
+    "default_bind": "unknown-check-compose",
+    "security_md": "https://github.com/cdapio/cdap/security/policy",
+    "pvr": true,
+    "new_vector": null
+  }
+]
