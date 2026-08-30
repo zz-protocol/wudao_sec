@@ -124,16 +124,20 @@ for (const it of items) {
     }
   }
 
-  if (osvHits.length && ac !== 3) {
-    fail.push(`OSV hits on package/sibling (not class-3): ${osvHits.slice(0, 5).map((h) => h.id).join(', ')}`);
+  const nv = String(it.new_vector || '').toLowerCase();
+  const same = /same (sink|gadget|file|vector)|no new vector|identical/.test(nv);
+  const distinct = /different (entry|gadget|guard|sink)|moved guard|new vector/.test(nv);
+  const siblingHits = osvHits.filter((h) => h.package && h.package !== pkgName);
+  if (siblingHits.length && (ac !== 3 || same || !distinct)) {
+    fail.push(`sibling-package OSV (${siblingHits.slice(0, 4).map((h) => h.id).join(', ')}) — tf-keras/keras pattern; need class 3 + distinct new_vector`);
   }
-  if (osvHits.length && ac === 3) {
-    const nv = String(it.new_vector || '').toLowerCase();
-    const same = /same (sink|gadget|file|vector)|no new vector|identical/.test(nv);
-    const distinct = /different (entry|gadget|guard|sink)|moved guard|new vector/.test(nv);
-    if (same || !distinct) {
-      fail.push('class 3 but new_vector is not distinct from sibling/existing OSV (tf-keras/keras pattern)');
-    }
+  // Same-package CVEs are expected on OT0/OT1 cash targets. Do not reject class 1.
+  // Class 2 (no cash program) + existing OSV → skip unless class 3 new vector.
+  if (osvHits.length && ac === 2 && (same || !distinct)) {
+    fail.push(`class 2 with existing OSV and no distinct new_vector: ${osvHits.slice(0, 4).map((h) => h.id).join(', ')}`);
+  }
+  if (osvHits.length && ac === 3 && (same || !distinct)) {
+    fail.push('class 3 but new_vector is not distinct from sibling/existing OSV (tf-keras/keras pattern)');
   }
 
   if (owner && name && token) {
