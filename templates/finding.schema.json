@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "wudao_sec finding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "repo",
+    "sha",
+    "sink",
+    "cwe",
+    "status",
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "repo": { "type": "string", "description": "owner/name" },
+    "sha": { "type": "string", "minLength": 7 },
+    "package": { "type": "string" },
+    "sink": {
+      "type": "object",
+      "required": ["file", "line", "primitive"],
+      "properties": {
+        "file": { "type": "string" },
+        "line": { "type": "integer" },
+        "primitive": { "type": "string" }
+      }
+    },
+    "cwe": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["unverified", "blocked", "candidate", "skip"]
+    },
+    "skip_reason": { "type": "string" },
+    "q1": { "type": "string", "description": "by-design / docs?" },
+    "q2": { "type": "string", "description": "default live instance? path to log" },
+    "q3": { "type": "string", "description": "what the operator loses" },
+    "q4": { "type": "string", "description": "OSV/GHSA date and why not the same issue" },
+    "call_chain": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "string" }
+  }
+}

@@ -1,0 +1,11 @@
+.env
+.env.*
+GATE.json
+**/node_modules/
+**/.DS_Store
+*.log
+tok.txt
+*.pem
+*.key
+findings/
+!templates/

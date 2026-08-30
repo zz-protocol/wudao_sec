@@ -1,0 +1,14 @@
+{
+  "id": "EX-001",
+  "repo": "example/app",
+  "sha": "deadbeef",
+  "package": "example-app",
+  "sink": { "file": "server/api.py", "line": 42, "primitive": "open()" },
+  "cwe": "CWE-22",
+  "status": "unverified",
+  "q1": "SECURITY.md does not describe this path as intentional",
+  "q2": "not run — blocked until default compose is up",
+  "q3": "unauthenticated read of files outside the upload root if Q2 holds",
+  "q4": "OSV empty for example-app on 2026-01-01; no GHSA on this file",
+  "call_chain": ["POST /upload", "save(user_path)", "open()"]
+}
