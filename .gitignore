@@ -1,9 +1,11 @@
 .env
-.env.*
+.env.local
+.env.*.local
 GATE.json
 **/node_modules/
 **/.DS_Store
 *.log
+!examples/repro.sample.log
 tok.txt
 *.pem
 *.key
