@@ -27,9 +27,10 @@ Fill the “current queue” yourself. The hunter must not append to it.
 For each candidate `owner/repo`:
 
 1. Read SECURITY.md and docs that mention auth / security / warnings
-2. Query OSV by **published package name**; same CWE + same file → `known`
+2. Query OSV by **published package name**. Empty is not a vacuum: also query **sibling packages** (`tf-keras`↔`keras`, `fschat`↔`fastchat`, `-core`/`-server` splits). Same CWE + same file/primitive → `SKIP known`, **zero files**
 3. Check default bind, default auth, official compose ports
-4. Not in allow → `SKIP <repo> <reason>`, zero files
+4. HEAD already patched, registry only missing a release → `SKIP ledger-gap` (metadata ping, hunter stops)
+5. Not in allow → `SKIP <repo> <reason>`, zero files
 
 ## Current queue (human-owned)
 

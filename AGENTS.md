@@ -19,8 +19,8 @@ Read `TARGET-POLICY.md` first.
 ## Not a vulnerability
 
 - SECURITY.md or official docs already say unauthenticated / do not expose / by design
-- Existing CVE/GHSA on the same sink with **no new vector**
-- Code already fixed; advisory ledger only missing `patched`
+- Existing CVE/GHSA on the same sink with **no new vector** (including a **sibling package** advisory: `tf-keras` vs `keras`)
+- Code already fixed; advisory ledger only missing `patched` / PyPI lag = T2, not a finding
 - Default-off flags; admin-only features
 - Default ClusterIP / internal RPC / localhost IPC written up as internet RCE 9.8
 - Function-level, AST-extracted, importlib, mocked-upstream “PoCs”

@@ -14,6 +14,7 @@ These are **process** failures. Copy the rule, not a target list.
 10. **Hunter prompt saying “never execute” fights Q2.** Agents will choose volume. Split roles; block submit in code.
 11. **Do not auto-resume a HOLD pile.** Static drafts are inventory debt.
 12. **Inbox empty ≠ not accepted.** Private GHSA status may never hit notifications.
+13. **OSV empty on this package name ≠ unknown.** Query sibling names. `tf-keras` had `{}` while `keras` already had GHSA-hqp4 / CVE-2026-11816 on the same tar-extract filter. That is `SKIP known` at step 2, not a four-page ledger-gap essay.
 
 ## Constraint upgrade
 
